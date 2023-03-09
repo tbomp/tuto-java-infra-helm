@@ -26,6 +26,10 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: PG_SERVICE
+              value: {{ include "demo-java-helm.fullname" . }}
+            - name: PG_DATABASE
+              value: {{ .Values.global.postgresql.auth.database }}
             - name: PG_USER
               value: {{ .Values.global.postgresql.auth.username }}
             - name: PG_PASSWORD
@@ -35,7 +39,7 @@ spec:
             - name: SPRING_DATASOURCE_PASSWORD
               value: $(PG_PASSWORD)
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/postgres
+              value: jdbc:postgresql://$(PG_SERVICE):5432/$(PG_DATABASE)
           ports:
             - name: http
               containerPort: 8080
