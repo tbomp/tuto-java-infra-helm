@@ -1,0 +1,62 @@
+# Default values for demo-java-helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: quay.apps.ocp4-8.infocepo.com/ministere-interieur-demo-pouet/app-java-forge-dso-demo
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "master"
+
+imagePullSecrets: 
+  - name: "quay-image-pull-secret"
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  secret:
+    enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: dso-demo-java-helm.apps.ocp4-8.infocepo.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: dso-demo-java-tls
+      hosts:
+        - dso-demo-java-helm.apps.ocp4-8.infocepo.com
+
+resources: 
+  limits:
+    memory: "512Mi"
+    cpu: "500m"  
+  requests:
+    memory: "512Mi"
+    cpu: "500m"  
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+global: 
+  postgresql:
+    auth:
+      postgresPassword: "MySupErPaSSwOrd"
+      username: "userdemo"
+      password: "passworddemo"
+      database: "demodb"
