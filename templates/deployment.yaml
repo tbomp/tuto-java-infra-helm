@@ -27,7 +27,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PG_SERVICE
-              value: {{ include "demo-java-helm.fullname" . }}
+              value: {{ include "demo-java-helm.fullname" . }}-postgresql
             - name: PG_DATABASE
               value: {{ .Values.global.postgresql.auth.database }}
             - name: PG_USER
