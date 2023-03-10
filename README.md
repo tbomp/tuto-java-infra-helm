@@ -13,7 +13,7 @@ Ce chart permet de créer :
 Ce Chart peut servir dans le cas d'un test de déploiement comme repo d'infrastructure depuis la console DSO.
 
 ## Variables
-### Base de données
+### Applications
 
 Fichier de variable minimal:
 
