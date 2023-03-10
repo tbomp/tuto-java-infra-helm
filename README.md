@@ -25,8 +25,7 @@ ingress:
   enabled: true # Création d'un ingress
   secret:
     enabled: false # Création du secret TLS false si déjà présent
-  hosts:
-    - host: dso-demo-java-helm-plec.apps.ocp4-8.infocepo.com # Nom d'host
+  host: dso-demo-java-helm-plec.apps.ocp4-8.infocepo.com # Nom d'host
   tls:
     - secretName: dso-demo-java-tls # Nom du secret contenant le certificat TLS
 ``` 
@@ -51,8 +50,7 @@ ingress:
   enabled: true # Création d'un ingress
   secret:
     enabled: false # Création du secret TLS false si déjà présent
-  hosts:
-    - host: dso-demo-java-helm-plec.apps.ocp4-8.infocepo.com # Nom d'host
+  host: dso-demo-java-helm-plec.apps.ocp4-8.infocepo.com # Nom d'host
   tls:
     - secretName: dso-demo-java-tls # Nom du secret contenant le certificat TLS
 
