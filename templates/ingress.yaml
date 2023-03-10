@@ -26,6 +26,7 @@ spec:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
+{{- end }}
 {{- if .Values.ingress.secret.enabled -}}
 ---
 apiVersion: v1
