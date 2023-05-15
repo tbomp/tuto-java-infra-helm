@@ -24,8 +24,6 @@ ingress:
   secret:
     enabled: true
   host: plec-demo.dev.numerique-interieur.com
-  tls:
-    secretName: dso-demo-java-tls
 
 resources: 
   limits:
