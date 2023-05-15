@@ -12,7 +12,41 @@ Ce chart permet de créer :
 
 Ce Chart peut servir dans le cas d'un test de déploiement comme repo d'infrastructure depuis la console DSO.
 
+## Mode opératoire
+
+Le plus simple est de réaliser un fork de ce repo github vers son organisation afin de pouvoir le modifier facilement.
+
+Une fois le repo forké dans son espace, éditer le fichier de values.yaml et modifier les 2 variables suivantes :
+
+```yaml
+image:
+  repository: quay.apps.ocp4-8.infocepo.com/<NOM_ORGANISATION>-<NOM_PROJET>/<NOM_REPO>
+```
+Le nom de l'image est à adapter en fonction des paramètres de création de son espace sur la console DSO, notamment le nom de son organisation, le nom du projet DSO et le nom du repo synchronisé.
+
+le nom complet peut également se trouver depuis gitlab-ci sur la pipeline de construction du projet de tuto java de la branche master sur la dernière étape de build  nommée docker-build :
+
+par exemple 
+
+```log
+INFO[0008] Pushing image to quay.apps.ocp4-8.infocepo.com/ministere-interieur-plec/app-java-forge-dso-demo:master 
+```
+
+Le deuxième paramètre à modifier est l'URL d'exposition de l'application, qui est précisé dans la partie ingress :
+
+```yaml
+ingress:
+  enabled: true
+  secret:
+    enabled: true
+  host: tuto.dev.numerique-interieur.com
+```
+
+Mettre ici le nom DNS correspondant à son déploiement une demande à l'équipe DSO doit être faite pour créer cet enregistrement sur les environnements en numerique-interieur.com
+
+
 ## Variables
+Détails des variables du fichier de déploiement
 ### Applications
 
 Fichier de variable minimal:
@@ -74,13 +108,40 @@ global:
       username: "userdemo" # Utilisateur en base de données dédié à l'application
       password: "passworddemo" # Mot de passe en base de données dédié à l'application
       database: "demodb" # Nom de la base de données dédiée à l'application
+postgresql:
+  fullnameOverride: postgres-demo # Nom du service postgresql qui est également utilisé par le deployment applicatif.
+# Contrainte de sécurité Openshift
+  volumePermissions:
+    enabled: false
+    securityContext:
+      runAsUser: "auto"
+  securityContext:
+    enabled: false
+  shmVolume:
+    chmod:
+      enabled: false
+  containerSecurityContext:
+    enabled: false
+  podSecurityContext:
+    enabled: false
+  primary:
+    volumePermissions:
+      enabled: false
+      securityContext:
+        runAsUser: "auto"
+    securityContext:
+      enabled: false
+    shmVolume:
+      chmod:
+        enabled: false
+    containerSecurityContext:
+      enabled: false
+    podSecurityContext:
+      enabled: false
 ```
 ## Utilisation dans DSO
 
-Lors de l'utilisation dans la console DSO, une fois le projet [démonstration java](https://github.com/dnum-mi/dso-tuto-java) construit, il faut ajouter un dépôt syncrhonisé de type dépôt d'infrastructure qui pointe vers ce repo github puis aller dans ArgoCD et modifier depuis l'application ArgoCD :
-App Details -> Parameters
- - image.repository : Adapter avec le nom de son image / organisation / projet
- - ingress.host : choisir une URL de déploiement non utilisée
+Une fois le repo ajouté comme repo synchronisé depuis la console DSO, il est nécessaire d'aller sur ArgoCD, depuis la console DSO aller dans le menu *Mes services* puis cliquez sur l'icône ArgoCD, choisir son application et cliquez sur *App Details* cliquez sur le bouton *EDIT* et modifier le champ *PATH* qui est indiqué à *BASE* et le remplacer par . (point)
 
 Problèmes connus :
 

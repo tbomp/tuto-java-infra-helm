@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: quay.apps.ocp4-8.infocepo.com/ministere-interieur-demo-pouet/app-java-forge-dso-demo
+  repository: quay.apps.ocp4-8.infocepo.com/ministere-interieur-plec/app-java-forge-dso-demo
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "master"
@@ -23,7 +23,7 @@ ingress:
   enabled: true
   secret:
     enabled: true
-  host: dso-demo-java-helm.apps.ocp4-8.infocepo.com
+  host: plec-demo.dev.numerique-interieur.com
   tls:
     secretName: dso-demo-java-tls
 
@@ -45,6 +45,7 @@ global:
 
 # Contrainte de sécurité Openshift
 postgresql:
+  fullnameOverride: postgres-demo
   volumePermissions:
     enabled: false
     securityContext:

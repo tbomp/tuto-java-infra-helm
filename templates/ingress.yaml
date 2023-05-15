@@ -12,10 +12,6 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  tls:
-    - hosts: 
-      - {{ .Values.ingress.host }}
-      secretName: {{ .Values.ingress.tls.secretName }}
   rules:
     - host: {{ .Values.ingress.host }}
       http:
