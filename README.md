@@ -39,10 +39,10 @@ ingress:
   enabled: true
   secret:
     enabled: true
-  host: tuto.dev.numerique-interieur.com
+  host: tuto.dso.numerique-interieur.com
 ```
 
-Mettre ici le nom DNS correspondant à son déploiement une demande à l'équipe DSO doit être faite pour créer cet enregistrement sur les environnements en numerique-interieur.com
+Mettre ici le nom DNS correspondant à son déploiement, de la forme nom_projet.dso.numerique-interieur.com
 
 
 ## Variables
