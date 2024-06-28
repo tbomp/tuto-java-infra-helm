@@ -5,6 +5,4 @@ image:
   tag: "master"
 
 ingress:
-  annotations:
-    route.openshift.io/termination: edge
   host: plec-demo-formation.apps.dso-formation.hp.numerique-interieur.com
