@@ -5,4 +5,4 @@ image:
   tag: "master"
 
 ingress:
-  host: plec-demo-integ.apps.dso-formation.hp.numerique-interieur.com
+  host: plec-demo-formation.apps.dso-formation.hp.numerique-interieur.com
