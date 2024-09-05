@@ -1,5 +1,5 @@
 image:
-  repository: harbor.apps.c6.numerique-interieur.com/mi-tuto/app-java-forge-dso-demo
+  repository: harbor.apps.dso.numerique-interieur.com/mi-form09/java-demo
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "master"
