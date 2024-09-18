@@ -1,4 +1,4 @@
-# Chart Helm de démonstration DSO
+# Chart Helm de démonstration DSO //
 
 ## Présentation
 
